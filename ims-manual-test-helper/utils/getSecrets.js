@@ -1,15 +1,10 @@
-const keytar = require("keytar")
-module.exports= async ()=>{
-	let clusteruri = await keytar.getPassword(
-		process.env.SERVICE,
-		process.env.DB
-	);
-	let archivepath = await keytar.getPassword(
-		process.env.SERVICE,
-		process.env.ARCHIVE
-	);
+const keytar = require('keytar');
+const config = require('./config.json');
+module.exports = async () => {
+	let clusteruri = await keytar.getPassword(config.service, config.db);
+	let archivepath = await keytar.getPassword(config.service, config.archive);
 	return {
 		clusteruri,
 		archivepath
-	}
-}
+	};
+};

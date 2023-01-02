@@ -2,16 +2,17 @@ const welcome = require('cli-welcome');
 const pkg = require('./../package.json');
 const unhandled = require('cli-handle-unhandled');
 const keytar = require('keytar');
+const config = require('./config.json');
 async function _configureDefaults() {
 	try {
 		await keytar.setPassword(
-			process.env.SERVICE,
-			process.env.DB,
+			config.service,
+			config.db,
 			'mongodb://localhost:27017'
 		);
 		await keytar.setPassword(
-			process.env.SERVICE,
-			process.env.ARCHIVE,
+			config.service,
+			config.archive,
 			__dirname + '/dump'
 		);
 	} catch (err) {

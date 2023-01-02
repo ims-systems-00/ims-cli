@@ -1,0 +1,5 @@
+{
+	"service": "imsmt",
+	"db": "db-name",
+	"archive": "snapshot-archive-path"
+}

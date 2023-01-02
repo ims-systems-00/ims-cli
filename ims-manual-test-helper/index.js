@@ -6,7 +6,6 @@
  *
  * @author Riadhossain43 <https://github.com/RiadHossain43>
  */
-require('dotenv').config();
 const init = require('./utils/init');
 const cli = require('./utils/cli');
 const log = require('./utils/log');
