@@ -7,11 +7,6 @@ async function _configureDefaults() {
 	try {
 		await keytar.setPassword(
 			config.service,
-			config.db,
-			'mongodb://localhost:27017'
-		);
-		await keytar.setPassword(
-			config.service,
 			config.archive,
 			__dirname + '/dump'
 		);
@@ -19,9 +14,9 @@ async function _configureDefaults() {
 		console.log(err);
 	}
 }
+_configureDefaults();
 module.exports = ({ clear = true }) => {
 	unhandled();
-	_configureDefaults();
 	welcome({
 		title: `ims-manual-test-helper`,
 		tagLine: `by Riadhossain43`,
