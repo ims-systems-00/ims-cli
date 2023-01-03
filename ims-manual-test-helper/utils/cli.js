@@ -6,55 +6,98 @@ const flags = {
 		type: `boolean`,
 		default: false,
 		alias: `c`,
-		desc: `Clear the console.`
+		desc: `--------------------------
+Clear the console.
+`
 	},
 	noClear: {
 		type: `boolean`,
 		default: false,
-		desc: `Don't clear the console.`
+		desc: `--------------------------
+Don't clear the console.
+`
 	},
 	debug: {
 		type: `boolean`,
 		default: false,
 		alias: `d`,
-		desc: `Print debug info.`
+		desc: `--------------------------
+Print debug info.
+`
 	},
 	version: {
 		type: `boolean`,
 		alias: `v`,
-		desc: `Print CLI version.`
+		desc: `--------------------------
+Print CLI version.
+`
 	},
 	orgName: {
 		type: `string`,
 		alias: `on`,
-		desc: `Organisation that has been saved by iMS Database admins.`
+		desc: `--------------------------
+Organisation that will be worked by iMS Database admins.
+`
 	},
 	torgName: {
 		type: `string`,
 		alias: `ton`,
-		desc: `Snapshotname for an orgaanisation.`
+		desc: `--------------------------
+Name for target orgaanisation.
+`
 	},
 	dbUri: {
 		type: `string`,
 		alias: `du`,
 		default: `mongodb://localhost:27017`,
-		desc: `Database uri for working environment.`
+		desc: `--------------------------
+Database uri for working environment.
+`
+	},
+	sName: {
+		type: `string`,
+		alias: `sn`,
+		default: `mongodb://localhost:27017`,
+		desc: `--------------------------
+Snaphot name to work with.
+`
 	}
 };
 
 const commands = {
-	help: { desc: `Print help information` },
-	config: { desc: `Configuration of the cli.` },
-	snapshot: { desc: `Snapshots current state of an organisation.` },
+	help: {
+		desc: `--------------------------
+Print help information
+`
+	},
+	config: {
+		desc: `--------------------------
+Configuration of the cli.
+`
+	},
+	snapshot: {
+		desc: `--------------------------
+Snapshots current state of an organisation.
+e.g. imsmt snapshot --orgName=some_organame --sName=some_snap_name
+`
+	},
 	loadsnap: {
-		desc: `Loads a snapshot of an organisation to new organisation.`
+		desc: `--------------------------
+Loads a snapshot of an organisation to new organisation. You need to supply three options
+to replicate the snapshot into targeted place.
+e.g. imsmt loadsnapshot --orgName=some_organame --sName=some_snap_name --torgName=target_orgname
+`
 	},
 	listsnap: {
-		desc: `Lists all taken snapshots.`
+		desc: `--------------------------
+Lists all taken snapshots. e.g. imsmt listsnap
+`
 	},
 	clearsnap: {
-		desc: `Clears all the taken snapshots. 
-		Supply --sName if specefic snap delete is required e.g. --sName="some_snap_name,anther_snap_name"`
+		desc: `--------------------------
+Clears all the taken snapshots. Supply --sName option if a specefic
+snap delete is required e.g. imsmt clearnsap --sName="some_snap_name,anther_snap_name"
+`
 	}
 };
 
