@@ -5,7 +5,7 @@
 	"license": "UNLICENSED",
 	"bin": {
 		"ims-manual-test-helper": "index.js",
-		"imsmt": "index.js"
+		"ims": "index.js"
 	},
 	"author": {
 		"name": "Riadhossain43",
