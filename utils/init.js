@@ -8,7 +8,7 @@ async function _configureDefaults() {
 		await keytar.setPassword(
 			config.service,
 			config.archive,
-			__dirname + '/dump'
+			(__dirname + '/dump').toString()
 		);
 	} catch (err) {
 		console.log(err);

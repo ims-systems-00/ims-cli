@@ -49,7 +49,7 @@ Name for target orgaanisation.
 	dbUri: {
 		type: `string`,
 		alias: `du`,
-		default: `mongodb://localhost:27017`,
+		default: ``,
 		desc: `--------------------------
 Database uri for working environment.
 `
@@ -57,9 +57,17 @@ Database uri for working environment.
 	sName: {
 		type: `string`,
 		alias: `sn`,
-		default: `mongodb://localhost:27017`,
+		default: ``,
 		desc: `--------------------------
 Snaphot name to work with.
+`
+	},
+	checkSecrets: {
+		type: `boolean`,
+		alias: `cs`,
+		default: false,
+		desc: `--------------------------
+Checks the secrets.
 `
 	}
 };

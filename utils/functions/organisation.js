@@ -56,7 +56,8 @@ async function listsnapshots() {
 }
 async function clearsnapshots({ sName }) {
 	try {
-		let list = sName?.split(',').map(item => `${item}.gzip`) || [];
+		let list = [];
+		if (sName) list = sName.split(',').map(item => `${item}.gzip`);
 		let secrets = await getsecrets();
 		fs.readdir(secrets.archivepath, (err, files) => {
 			if (err) return console.log(err);
@@ -69,6 +70,7 @@ async function clearsnapshots({ sName }) {
 				})
 				.forEach(file => {
 					fs.unlinkSync(secrets.archivepath + `/${file}`);
+					console.log(file, '...cleared');
 				});
 		});
 	} catch (err) {

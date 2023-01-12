@@ -25,7 +25,8 @@ const { clear, debug } = flags;
 	input.includes(`help`) && cli.showHelp(0);
 	input.includes(`config`) &&
 		dbUri({
-			dbUri: flags.dbUri
+			dbUri: flags.dbUri,
+			checkSecrets: flags.checkSecrets
 		});
 	input.includes(`snapshot`) &&
 		dbsnapshot({
