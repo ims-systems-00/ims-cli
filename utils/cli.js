@@ -34,21 +34,18 @@ Print CLI version.
 	},
 	orgName: {
 		type: `string`,
-		alias: `on`,
 		desc: `--------------------------
 Organisation that will be worked by iMS Database admins.
 `
 	},
 	torgName: {
 		type: `string`,
-		alias: `ton`,
 		desc: `--------------------------
 Name for target orgaanisation.
 `
 	},
 	dbUri: {
 		type: `string`,
-		alias: `du`,
 		default: ``,
 		desc: `--------------------------
 Database uri for working environment.
@@ -56,7 +53,6 @@ Database uri for working environment.
 	},
 	sName: {
 		type: `string`,
-		alias: `sn`,
 		default: ``,
 		desc: `--------------------------
 Snaphot name to work with.
@@ -64,7 +60,6 @@ Snaphot name to work with.
 	},
 	checkSecrets: {
 		type: `boolean`,
-		alias: `cs`,
 		default: false,
 		desc: `--------------------------
 Checks the secrets.
