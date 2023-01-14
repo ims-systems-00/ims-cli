@@ -64,6 +64,13 @@ Snaphot name to work with.
 		desc: `--------------------------
 Checks the secrets.
 `
+	},
+	archivePath: {
+		type: `string`,
+		default: ``,
+		desc: `--------------------------
+Path where the snapshots are stored.
+`
 	}
 };
 

@@ -3,13 +3,17 @@ const pkg = require('./../package.json');
 const unhandled = require('cli-handle-unhandled');
 const keytar = require('keytar');
 const config = require('./config.json');
+const getSecrets = require('./getSecrets');
+
 async function _configureDefaults() {
 	try {
-		await keytar.setPassword(
-			config.service,
-			config.archive,
-			(__dirname + '/dump').toString()
-		);
+		let secrets = await getSecrets();
+		if (!secrets.archivepath)
+			await keytar.setPassword(
+				config.service,
+				config.archive,
+				(__dirname + '/dump').toString()
+			);
 	} catch (err) {
 		console.log(err);
 	}
