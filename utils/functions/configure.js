@@ -43,7 +43,10 @@ async function dbUri({ dbUri, checkSecrets, archivePath }) {
 				config.service,
 				config.archive
 			);
-			if (currentArchivePath !== archivePath) {
+			if (
+				currentArchivePath !== archivePath &&
+				fs.existsSync(currentArchivePath)
+			) {
 				fs.readdir(currentArchivePath, (err, files) => {
 					if (err) return console.log(err);
 					files.forEach(file => {
