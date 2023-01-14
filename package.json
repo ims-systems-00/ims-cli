@@ -1,7 +1,7 @@
 {
   "name": "@riadhossain43/ims-cli",
   "description": "This cli is created for automating various tasks for ims-systems",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "UNLICENSED",
   "bin": {
     "ims-manual-test-helper": "index.js",
