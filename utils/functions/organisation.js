@@ -4,8 +4,10 @@ const { runCommand } = require('../runCommand');
 const getsecrets = require('../getSecrets');
 const moment = require('moment/moment');
 const snapshotmatch = /[.]gzip$/;
-async function dbsnapshot({ orgName, sName }) {
+const chalk = require('chalk');
+async function takesnapshot({ orgName, sName }) {
 	try {
+		if (!orgName) throw new Error('orgName flag is required.');
 		let secrets = await getsecrets();
 		const ARCHIVE_PATH = path.join(
 			secrets.archivepath,
@@ -17,13 +19,17 @@ async function dbsnapshot({ orgName, sName }) {
 			`--archive=${ARCHIVE_PATH}`,
 			`--gzip`
 		]);
-		console.log('Snapshot take success');
+		console.log(chalk.green('Snapshot take success\n'));
 	} catch (err) {
+		console.log(chalk.red(err.message));
 		console.log(err);
 	}
 }
 async function loadsnapshot({ sName, orgName, torgName }) {
 	try {
+		if (!sName) throw new Error('sName flag is required.');
+		if (!orgName) throw new Error('orgName flag is required.');
+		if (!torgName) throw new Error('torgName flag is required.');
 		let secrets = await getsecrets();
 		const ARCHIVE_PATH = path.join(secrets.archivepath, `/${sName}.gzip`);
 		await runCommand('mongorestore', [
@@ -34,8 +40,9 @@ async function loadsnapshot({ sName, orgName, torgName }) {
 			'--gzip',
 			'--drop'
 		]);
-		console.log('Snapshot load success');
+		console.log(chalk.green('Snapshot load success\n'));
 	} catch (err) {
+		console.log(chalk.red(err.message));
 		console.log(err);
 	}
 }
@@ -47,10 +54,11 @@ async function listsnapshots() {
 			files
 				.filter(file => snapshotmatch.test(file))
 				.forEach(file => {
-					console.log(file);
+					console.log(chalk.green(file));
 				});
 		});
 	} catch (err) {
+		console.log(chalk.red(err.message));
 		console.log(err);
 	}
 }
@@ -70,21 +78,18 @@ async function clearsnapshots({ sName }) {
 				})
 				.forEach(file => {
 					fs.unlinkSync(secrets.archivepath + `/${file}`);
-					console.log(file, '...cleared');
+					console.log(chalk.green(file), '...cleared');
 				});
 		});
 	} catch (err) {
+		console.log(chalk.red(err.message));
 		console.log(err);
 	}
 }
 
 module.exports = {
-	dbsnapshot,
+	takesnapshot,
 	loadsnapshot,
 	listsnapshots,
 	clearsnapshots
 };
-
-// fs.readdirSync(path)
-// 	.filter(f => regex.test(f))
-// 	.map(f => fs.unlinkSync(path + f));

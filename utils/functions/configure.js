@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const config = require('../config.json');
 const getSecrets = require('../getSecrets');
-async function dbUri({ dbUri, checkSecrets, archivePath }) {
+const chalk = require('chalk');
+async function configure({ dbUri, check, archivePath }) {
 	if (dbUri) {
 		try {
 			await keytar.setPassword(
@@ -12,14 +13,15 @@ async function dbUri({ dbUri, checkSecrets, archivePath }) {
 				dbUri.toString()
 			);
 			console.log(
-				await keytar.getPassword(config.service, config.db),
-				'configured for manipulation'
+				chalk.cyan(await keytar.getPassword(config.service, config.db)),
+				'configured for manipulation\n'
 			);
 		} catch (err) {
+			console.log(chalk.red(err.message));
 			console.log(err);
 		}
 	}
-	if (checkSecrets) {
+	if (check) {
 		try {
 			let secrets = await getSecrets();
 			Object.keys(secrets).forEach(key => {
@@ -27,13 +29,16 @@ async function dbUri({ dbUri, checkSecrets, archivePath }) {
 					.toString()
 					.slice(0, secrets[key].length - 5);
 				console.log(
-					new Array(ends.length + 1).join('*') +
-						secrets[key]
-							.toString()
-							.slice(ends.length, secrets[key].length)
+					chalk.cyanBright(
+						new Array(ends.length + 1).join('*') +
+							secrets[key]
+								.toString()
+								.slice(ends.length, secrets[key].length)
+					)
 				);
 			});
 		} catch (err) {
+			console.log(chalk.red(err.message));
 			console.log(err);
 		}
 	}
@@ -79,15 +84,18 @@ async function dbUri({ dbUri, checkSecrets, archivePath }) {
 					archivePath.toString()
 				);
 				console.log(
-					await keytar.getPassword(config.service, config.archive),
-					'configured for storing snapshots'
+					chalk.cyan(
+						await keytar.getPassword(config.service, config.archive)
+					),
+					'configured for storing snapshots\n'
 				);
 			}
 		} catch (err) {
+			console.log(chalk.red(err.message));
 			console.log(err);
 		}
 	}
 }
 module.exports = {
-	dbUri
+	configure
 };

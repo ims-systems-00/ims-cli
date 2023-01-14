@@ -7,14 +7,14 @@ const flags = {
 		default: false,
 		alias: `c`,
 		desc: `--------------------------
-Clear the console.
+Clears the console.
 `
 	},
 	noClear: {
 		type: `boolean`,
 		default: false,
 		desc: `--------------------------
-Don't clear the console.
+Doesn't clear the console.
 `
 	},
 	debug: {
@@ -22,54 +22,54 @@ Don't clear the console.
 		default: false,
 		alias: `d`,
 		desc: `--------------------------
-Print debug info.
+Prints debug info.
 `
 	},
 	version: {
 		type: `boolean`,
 		alias: `v`,
 		desc: `--------------------------
-Print CLI version.
+Prints CLI version.
 `
 	},
 	orgName: {
 		type: `string`,
 		desc: `--------------------------
-Organisation that will be worked by iMS Database admins.
+Specifies organisation name to work with in various commands.
 `
 	},
 	torgName: {
 		type: `string`,
 		desc: `--------------------------
-Name for target orgaanisation.
+Specifies target organisation name to work with in various commands.
 `
 	},
 	dbUri: {
 		type: `string`,
 		default: ``,
 		desc: `--------------------------
-Database uri for working environment.
+Specifies database environment to work with. It's used with config command.
 `
 	},
 	sName: {
 		type: `string`,
 		default: ``,
 		desc: `--------------------------
-Snaphot name to work with.
+Specifies snaphot name to work with in various commands.
 `
 	},
-	checkSecrets: {
+	check: {
 		type: `boolean`,
 		default: false,
 		desc: `--------------------------
-Checks the secrets.
+Utilised for checking current config. Utilised with config command.
 `
 	},
 	archivePath: {
 		type: `string`,
 		default: ``,
 		desc: `--------------------------
-Path where the snapshots are stored.
+Specifies the archive path or directory where the snapshots are stored.
 `
 	}
 };
@@ -77,42 +77,51 @@ Path where the snapshots are stored.
 const commands = {
 	help: {
 		desc: `--------------------------
-Print help information
+Prints help information
 `
 	},
 	config: {
 		desc: `--------------------------
-Configuration of the cli.
+Tells that we are working with the configuration of the cli.
 `
 	},
 	snapshot: {
 		desc: `--------------------------
-Snapshots current state of an organisation.
-e.g. imsmt snapshot --orgName=some_organame --sName=some_snap_name
+Tells that we are working with snapshots of organisations.
+e.g. ims snapshot
 `
 	},
-	loadsnap: {
+	load: {
 		desc: `--------------------------
-Loads a snapshot of an organisation to new organisation. You need to supply three options
-to replicate the snapshot into targeted place.
-e.g. imsmt loadsnapshot --orgName=some_organame --sName=some_snap_name --torgName=target_orgname
+Loads a snapshot of an organisation to new organisation. You need to use it along with 'snapshot' command and
+supply three required options (--orgName --sName --torgName) to replicate the snapshot into targeted organisation.
+e.g. ims snapshot load --orgName=some_organame --sName=some_snap_name --torgName=target_orgname
 `
 	},
-	listsnap: {
+	take: {
 		desc: `--------------------------
-Lists all taken snapshots. e.g. imsmt listsnap
+Takes a snapshot of an organisation into your local machine. You need to use it along with 'snapshot' command. You
+also need supply required flag --orgName. To optionally give a name to your snapshot you need to supply --sName flag.
+e.g. ims snapshot take --orgName=some_organame --sName=some_snap_name
 `
 	},
-	clearsnap: {
+	list: {
 		desc: `--------------------------
-Clears all the taken snapshots. Supply --sName option if a specefic
-snap delete is required e.g. imsmt clearnsap --sName="some_snap_name,anther_snap_name"
+Lists all taken snapshots. You need to use it along with 'snapshot' command.
+e.g. ims snapshot list. No flag is supported as of now.
+`
+	},
+	clear: {
+		desc: `--------------------------
+Clears all the taken snapshots. You need to use it along with 'snapshot' command. Supply --sName option 
+if a specefic or a list of snapshosts delete functionality is required.
+e.g. ims snapshot clear --sName="some_snap_name,anther_snap_name"
 `
 	}
 };
 
 const helpText = meowHelp({
-	name: `imsmt`,
+	name: `ims`,
 	flags,
 	commands
 });
