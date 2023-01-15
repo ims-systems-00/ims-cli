@@ -107,8 +107,8 @@ e.g. ims snapshot take --orgName=some_organame --sName=some_snap_name
 	},
 	list: {
 		desc: `--------------------------
-Lists all taken snapshots. You need to use it along with 'snapshot' command.
-e.g. ims snapshot list. No flag is supported as of now.
+Lists all taken snapshots. You need to use it along with 'snapshot' command. No flag is supported as of now.
+e.g. ims snapshot list. 
 `
 	},
 	clear: {
