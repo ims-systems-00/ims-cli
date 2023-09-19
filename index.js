@@ -6,16 +6,16 @@
  *
  * @author Riadhossain43 <https://github.com/RiadHossain43>
  */
-const init = require('./utils/init');
-const cli = require('./utils/cli');
-const log = require('./utils/log');
+const init = require('./lib/init');
+const cli = require('./lib/cli');
+const log = require('./lib/log');
 const {
 	takesnapshot,
 	loadsnapshot,
 	listsnapshots,
 	clearsnapshots,
 	configure
-} = require('./utils/functions');
+} = require('./lib/functions');
 const input = cli.input;
 const flags = cli.flags;
 const { clear, debug } = flags;
