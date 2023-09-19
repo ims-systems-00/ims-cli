@@ -6,6 +6,7 @@
  *
  * @author Riadhossain43 <https://github.com/RiadHossain43>
  */
+global.environmentVars = {};
 const init = require('./lib/init');
 const cli = require('./lib/cli');
 const log = require('./lib/log');
@@ -14,7 +15,8 @@ const {
 	loadsnapshot,
 	listsnapshots,
 	clearsnapshots,
-	configure
+	configure,
+	startLocalDocumentMigration
 } = require('./lib/functions');
 const input = cli.input;
 const flags = cli.flags;
@@ -50,6 +52,9 @@ const { clear, debug } = flags;
 		if (input.includes(`clear`)) {
 			return clearsnapshots({ sName: flags.sName });
 		}
+	}
+	if (input.includes(`migratedocs`)) {
+		return startLocalDocumentMigration();
 	}
 	cli.showHelp(0);
 	debug && log(flags);
