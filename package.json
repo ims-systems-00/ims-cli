@@ -38,6 +38,6 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.comims-systems-00/ims-cli.git"
+    "url": "git@github.com/ims-systems-00/ims-cli.git"
   }
 }
